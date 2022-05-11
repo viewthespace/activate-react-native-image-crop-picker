@@ -1,3 +1,6 @@
+# ANDY FORKED THIS, we need the upstream commit here https://github.com/ivpusic/react-native-image-crop-picker/commit/1870e4ddbea65d5c602402d4ed4423975c576354 , but this is causing our tests to fail for a reason I can't figure out in time. 
+I forked the repo at a known working version and applied the patch from the above commit. yeeehaw
+
 # react-native-image-crop-picker
 
 [![Backers on Open Collective](https://opencollective.com/react-native-image-crop-picker/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/react-native-image-crop-picker/sponsors/badge.svg)](#sponsors)
