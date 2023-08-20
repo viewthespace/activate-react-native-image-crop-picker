@@ -18,9 +18,10 @@ iOS/Android image picker with support for camera, video, configurable compressio
   <img width=200 title="iOS Crop Circular" src="https://github.com/ivpusic/react-native-image-crop-picker/blob/master/images/ios_circular_crop.png">
 </p>
 
-## Important note
+## Important notes
 
-If you are using react-native >= 0.60 use react-native-image-crop-picker version >= 0.25.0. Otherwise use version < 0.25.0.
+1. If you are using react-native >= 0.60 use react-native-image-crop-picker version >= 0.25.0. Otherwise use version < 0.25.0.
+2. If you want to use react-native-image-crop-picker version >= 0.39.0 you have to set your android compileSdkVersion to 33 or greater. Otherwise use react-native-image-crop-picker version < 0.39.0
 
 ## Usage
 
@@ -63,7 +64,7 @@ ImagePicker.openPicker({
 });
 ```
 
-**Android: The prop 'cropping' has been known to cause videos not to be display in the gallery on Android. Please do not set cropping to true when selecting videos.**
+**Android: The prop 'cropping' has been known to cause videos not to be displayed in the gallery on Android. Please do not set cropping to true when selecting videos.**
 
 
 ### Select from camera 
@@ -129,7 +130,8 @@ ImagePicker.clean().then(() => {
 | cropperActiveWidgetColor (android only) |       string (default `"#424242"`)       | When cropping image, determines ActiveWidget color. |
 | cropperStatusBarColor (android only)    |        string (default `#424242`)        | When cropping image, determines the color of StatusBar. |
 | cropperToolbarColor (android only)      |        string (default `#424242`)        | When cropping image, determines the color of Toolbar. |
-| freeStyleCropEnabled (android only)      |        bool (default false)        | Enables user to apply custom rectangle area for cropping |
+| cropperToolbarWidgetColor (android only)      |        string (default `darker orange`)        | When cropping image, determines the color of Toolbar text and buttons. |
+| freeStyleCropEnabled      |        bool (default false)        | Enables user to apply custom rectangle area for cropping |
 | cropperToolbarTitle                     |        string (default `Edit Photo`)     | When cropping image, determines the title of Toolbar. |
 | cropperCircleOverlay                    |           bool (default false)           | Enable or disable circular cropping mask. |
 | disableCropperColorSetters (android only)|           bool (default false)           | When cropping image, disables the color setters for cropping library. |
@@ -152,10 +154,15 @@ ImagePicker.clean().then(() => {
 | hideBottomControls (android only)       |           bool (default false)           | Whether to display bottom controls       |
 | enableRotationGesture (android only)    |           bool (default false)           | Whether to enable rotating the image by hand gesture |
 | cropperChooseText (ios only)            |           string (default choose)        | Choose button text |
+| cropperChooseColor (ios only)           |           string (default `#FFCC00`)        | HEX format color for the Choose button. [Default color is controlled by TOCropViewController](https://github.com/TimOliver/TOCropViewController/blob/a942414508012b13102f776eb65dac655f31cabb/Objective-C/TOCropViewController/Views/TOCropToolbar.m#L444). |
 | cropperCancelText (ios only)            |           string (default Cancel)        | Cancel button text |
+| cropperCancelColor (ios only)           |           string (default tint `iOS` color )        | HEX format color for the Cancel button. Default value is the default tint iOS color [controlled by TOCropViewController](https://github.com/TimOliver/TOCropViewController/blob/a942414508012b13102f776eb65dac655f31cabb/Objective-C/TOCropViewController/Views/TOCropToolbar.m#L433) |
+| cropperRotateButtonsHidden (ios only)   |           bool (default false)           | Enable or disable cropper rotate buttons |
+
 
 #### Smart Album Types (ios)
 
+NOTE: Some of these types may not be available on all iOS versions. Be sure to check this to avoid issues.
 ```
 ['PhotoStream', 'Generic', 'Panoramas', 'Videos', 'Favorites', 'Timelapses', 'AllHidden', 'RecentlyAdded', 'Bursts', 'SlomoVideos', 'UserLibrary', 'SelfPortraits', 'Screenshots', 'DepthEffect', 'LivePhotos', 'Animated', 'LongExposure']
 ```
@@ -172,6 +179,7 @@ ImagePicker.clean().then(() => {
 | height                    | number | Selected image height                    |
 | mime                      | string | Selected image MIME type (image/jpeg, image/png) |
 | size                      | number | Selected image size in bytes             |
+| duration                  | number | Video duration time in milliseconds      |
 | data                      | base64 | Optional base64 selected file representation |
 | exif                      | object | Extracted exif data from image. Response format is platform specific |
 | cropRect                  | object | Cropped image rectangle (width, height, x, y)    |
@@ -262,6 +270,18 @@ android {
     ...
 }
 ```
+
+- Minimum Gradle version if you are using react-native-image-crop-picker >= 0.35.0
+
+```
+3.3.3
+3.4.3
+3.5.4
+3.6.4
+4.0.1
+```
+
+Reference for more details https://github.com/ivpusic/react-native-image-crop-picker/issues/1406
 
 - [Optional] If you want to use camera picker in your project, add following to `app/src/main/AndroidManifest.xml`
   - `<uses-permission android:name="android.permission.CAMERA"/>`
